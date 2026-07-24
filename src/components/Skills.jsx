@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Cpu, Code, Server, Cloud, Wrench, Layers } from 'lucide-react';
+import TechIcon from './TechIcons';
 
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -93,27 +94,34 @@ const Skills = () => {
           {filteredSkills.map((skill, idx) => (
             <div
               key={idx}
-              className="glass-card rounded-2xl p-5 border border-white/10 hover:border-blue-400/40 group transition-all duration-300 flex flex-col justify-between"
+              className="glass-card rounded-2xl p-5 border border-white/10 hover:border-blue-400/50 group transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-950/40 hover:-translate-y-1"
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
+                {/* Header with Tool Icon & Level Pill */}
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-white text-base group-hover:text-blue-300 transition-colors">
-                    {skill.name}
-                  </span>
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400`}>
+                  <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 group-hover:scale-110 group-hover:border-blue-400/40 transition-all duration-300">
+                    <TechIcon name={skill.name} className="w-6 h-6" />
+                  </div>
+                  <span className={`text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300 group-hover:border-blue-400/40 transition-colors`}>
                     {skill.level}
                   </span>
                 </div>
                 
-                <p className="text-xs text-slate-400 leading-normal">
-                  {skill.desc}
-                </p>
+                {/* Skill Name & Description */}
+                <div>
+                  <h3 className="font-bold text-white text-base group-hover:text-blue-300 transition-colors">
+                    {skill.name}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                    {skill.desc}
+                  </p>
+                </div>
               </div>
 
-              {/* Accent Line */}
-              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              {/* Accent Bottom Bar */}
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono tracking-wider">
                 <span>{skill.category.toUpperCase()}</span>
-                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color}`}></div>
+                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color} group-hover:scale-125 transition-transform`}></div>
               </div>
             </div>
           ))}

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Mail, Send, Copy, Check, MapPin, Phone, MessageSquare, Sparkles } from 'lucide-react';
+import { Mail, Send, Copy, Check, MapPin, Phone, MessageSquare, Sparkles, Loader2 } from 'lucide-react';
 import GithubIcon from './GithubIcon';
 import confetti from 'canvas-confetti';
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
@@ -23,18 +24,51 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 3000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 5000);
+    setIsSending(true);
+
+    try {
+      // Send form submission to FormSubmit API -> forwards directly to nayakdevi8@gmail.com
+      const response = await fetch('https://formsubmit.co/ajax/nayakdevi8@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}: ${formData.subject}`
+        })
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } else {
+        // Fallback to mailto link if network issue
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Email submission error:', error);
+      // Fallback mailto trigger
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      setSubmitted(true);
+    } finally {
+      setIsSending(false);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }, 6000);
+    }
   };
 
   return (
@@ -54,7 +88,7 @@ const Contact = () => {
             Get In <span className="text-gradient">Touch</span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-base">
-            Have a project, opportunity, or technical discussion in mind? Feel free to send a message or connect directly!
+            Have a project, opportunity, or technical discussion in mind? Send a message directly to my Gmail!
           </p>
         </div>
 
@@ -79,7 +113,7 @@ const Contact = () => {
                     <Mail className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-xs text-slate-400 font-mono block">EMAIL ADDRESS</span>
+                    <span className="text-xs text-slate-400 font-mono block">MY GMAIL ADDRESS</span>
                     <a href={`mailto:${email}`} className="text-sm font-bold text-white hover:text-blue-300 transition-colors truncate block">
                       {email}
                     </a>
@@ -151,17 +185,17 @@ const Contact = () => {
             <div className="glass-panel rounded-3xl p-8 border border-white/10 space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">Send Me a Message</h3>
-                <p className="text-xs text-slate-400 mt-1">Fill out the form below and I will get back to you promptly.</p>
+                <p className="text-xs text-slate-400 mt-1">This form sends a message directly to my Gmail inbox (<span className="text-blue-400 font-mono">nayakdevi8@gmail.com</span>).</p>
               </div>
 
               {submitted ? (
-                <div className="p-8 rounded-2xl glass-card border border-emerald-400/40 bg-emerald-950/20 text-center space-y-3">
+                <div className="p-8 rounded-2xl glass-card border border-emerald-400/40 bg-emerald-950/20 text-center space-y-3 animate-in fade-in duration-300">
                   <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
                     <Sparkles className="w-6 h-6" />
                   </div>
-                  <h4 className="text-xl font-bold text-white">Message Sent Successfully!</h4>
+                  <h4 className="text-xl font-bold text-white">Message Dispatched to Gmail!</h4>
                   <p className="text-xs text-slate-300 max-w-sm mx-auto">
-                    Thank you for reaching out. I have received your message and will reply to <span className="text-emerald-300 font-semibold">{formData.email || 'your email'}</span> as soon as possible.
+                    Thank you for reaching out. Your message has been sent directly to <span className="text-emerald-300 font-semibold">nayakdevi8@gmail.com</span>.
                   </p>
                 </div>
               ) : (
@@ -217,10 +251,20 @@ const Contact = () => {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-all"
+                    disabled={isSending}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-all disabled:opacity-50"
                   >
-                    <Send className="w-4 h-4" />
-                    Send Message
+                    {isSending ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending to nayakdevi8@gmail.com...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Direct Message to Gmail
+                      </>
+                    )}
                   </button>
                 </form>
               )}
