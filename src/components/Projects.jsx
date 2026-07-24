@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import { ExternalLink, Layers, Play, Monitor, CheckCircle, Sparkles, X, Eye } from 'lucide-react';
 import GithubIcon from './GithubIcon';
 
-const Projects = () => {
+const Projects = ({ onIframeToggle }) => {
   const [activeIframe, setActiveIframe] = useState(null);
+
+  const openIframe = (project) => {
+    setActiveIframe(project);
+    if (onIframeToggle) onIframeToggle(true);
+  };
+
+  const closeIframe = () => {
+    setActiveIframe(null);
+    if (onIframeToggle) onIframeToggle(false);
+  };
 
   const projectsList = [
     {
@@ -163,7 +173,7 @@ const Projects = () => {
                   </a>
 
                   <button
-                    onClick={() => setActiveIframe(project)}
+                    onClick={() => openIframe(project)}
                     className="flex items-center gap-2 px-5 py-3 text-xs font-bold text-slate-200 glass-card hover:bg-white/10 rounded-xl border border-white/15 hover:scale-105 transition-all"
                   >
                     <Eye className="w-4 h-4 text-purple-400" />
@@ -186,7 +196,7 @@ const Projects = () => {
               {/* Right Column: Visual Live Web Card Mockup */}
               <div className="lg:col-span-5 flex flex-col justify-center">
                 <div 
-                  onClick={() => setActiveIframe(project)}
+                  onClick={() => openIframe(project)}
                   className="relative glass-card rounded-2xl p-2 border border-white/15 cursor-pointer group/preview overflow-hidden shadow-2xl hover:border-blue-400/50 transition-all duration-300"
                 >
                   {/* Browser Window Header Mockup */}
@@ -232,14 +242,14 @@ const Projects = () => {
 
       {/* Interactive Embedded Iframe Modal */}
       {activeIframe && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-in fade-in duration-200">
           <div className="glass-panel w-full max-w-6xl h-[85vh] rounded-3xl border border-white/20 shadow-2xl flex flex-col overflow-hidden">
             
             {/* Modal Browser Header */}
             <div className="flex items-center justify-between px-6 py-4 bg-slate-900 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
-                  <button onClick={() => setActiveIframe(null)} className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80"></button>
+                  <button onClick={closeIframe} className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80"></button>
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
@@ -263,7 +273,7 @@ const Projects = () => {
                   <span className="hidden sm:inline">Open New Tab</span>
                 </a>
                 <button
-                  onClick={() => setActiveIframe(null)}
+                  onClick={closeIframe}
                   className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white"
                 >
                   <X className="w-5 h-5" />

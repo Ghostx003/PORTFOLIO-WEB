@@ -11,12 +11,15 @@ import ResumeModal from './components/ResumeModal';
 
 function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [isLivePreviewOpen, setIsLivePreviewOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#05070f] text-slate-100 selection:bg-blue-500 selection:text-white relative font-sans overflow-x-hidden">
       
-      {/* Sticky Glass Navbar */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      {/* Sticky Glass Navbar - Automatically hidden during full screen live previews */}
+      {!isLivePreviewOpen && (
+        <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      )}
 
       {/* Main Content */}
       <main className="relative z-10">
@@ -24,7 +27,7 @@ function App() {
         <About />
         <Skills />
         <Timeline />
-        <Projects />
+        <Projects onIframeToggle={(isOpen) => setIsLivePreviewOpen(isOpen)} />
         <Contact />
       </main>
 
