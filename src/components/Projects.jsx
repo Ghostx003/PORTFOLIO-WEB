@@ -3,12 +3,18 @@ import { ExternalLink, Layers, Play, Monitor, CheckCircle, Sparkles, X, Eye, Max
 import GithubIcon from './GithubIcon';
 
 const VercelLiveCard = ({ project, onExpand }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [key, setKey] = useState(0);
   const isVercelLive = project.liveUrl.includes('vercel.app');
 
   const handleRefresh = (e) => {
     e.stopPropagation();
     setKey((prev) => prev + 1);
+  };
+
+  const handleLoadDemo = (e) => {
+    e.stopPropagation();
+    setIsLoaded(true);
   };
 
   return (
@@ -38,7 +44,7 @@ const VercelLiveCard = ({ project, onExpand }) => {
 
         {/* Header Action Buttons */}
         <div className="flex items-center gap-1.5">
-          {isVercelLive && (
+          {isVercelLive && isLoaded && (
             <button
               onClick={handleRefresh}
               className="p-1 rounded-md bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
@@ -49,7 +55,7 @@ const VercelLiveCard = ({ project, onExpand }) => {
           )}
           <button
             onClick={() => onExpand(project)}
-            className="p-1 rounded-md bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white transition-colors"
+            className="p-1 rounded-md bg-teal-600/30 hover:bg-teal-600 text-teal-300 hover:text-white transition-colors"
             title="Expand Fullscreen Preview"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -59,7 +65,7 @@ const VercelLiveCard = ({ project, onExpand }) => {
 
       {/* Embedded Live Frame / Card Body */}
       <div className="relative h-80 sm:h-96 w-full bg-slate-950 overflow-hidden rounded-b-xl">
-        {isVercelLive ? (
+        {isLoaded ? (
           <iframe
             key={key}
             src={project.liveUrl}
@@ -68,8 +74,8 @@ const VercelLiveCard = ({ project, onExpand }) => {
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
           ></iframe>
         ) : (
-          /* Vercel Deployment Card for GitHub repo project */
-          <div className="w-full h-full flex flex-col justify-between p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 relative">
+          /* Vercel Preview Card (Lazy-loaded to prevent auto-scrolling on initial page visit) */
+          <div className="w-full h-full flex flex-col justify-between p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 relative group/preview">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-400" />
@@ -84,37 +90,37 @@ const VercelLiveCard = ({ project, onExpand }) => {
               </span>
             </div>
 
-            <div className="space-y-3 py-4">
-              <span className="text-xs text-amber-400 font-mono uppercase tracking-wider block">Real Business E-Commerce</span>
+            <div className="space-y-3 py-4 text-center sm:text-left">
+              <span className="text-xs text-teal-400 font-mono uppercase tracking-wider block">{project.badge}</span>
               <h4 className="text-2xl font-extrabold text-white">{project.title}</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">{project.tagline}</p>
+              <p className="text-xs text-slate-300 leading-relaxed max-w-md">{project.tagline}</p>
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 transition-colors"
+            {/* Launch Interactive Live Demo Overlay */}
+            <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+              <button
+                onClick={handleLoadDemo}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 rounded-xl shadow-lg shadow-teal-500/20 transition-all hover:scale-105"
               >
-                <GithubIcon className="w-4 h-4" />
-                View Code on GitHub
-              </a>
+                <Play className="w-3.5 h-3.5 fill-current" />
+                Load Live Interactive Demo
+              </button>
+
               <button
                 onClick={() => onExpand(project)}
-                className="flex items-center gap-1.5 text-xs text-blue-400 font-semibold hover:underline"
+                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white font-semibold transition-colors"
               >
-                Full Details <Maximize2 className="w-3.5 h-3.5" />
+                Fullscreen Preview <Maximize2 className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
         )}
 
-        {/* Floating Vercel Status Badge Overlay */}
-        {isVercelLive && (
+        {/* Floating Vercel Status Badge Overlay when live demo is running */}
+        {isLoaded && (
           <div className="absolute bottom-3 right-3 glass-panel px-3 py-1.5 rounded-xl border border-white/20 text-[11px] font-medium text-slate-200 shadow-xl flex items-center gap-2 backdrop-blur-md pointer-events-none">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Live Interactive Demo</span>
+            <span>Live Interactive Demo Running</span>
           </div>
         )}
       </div>
@@ -225,7 +231,7 @@ const Projects = ({ onIframeToggle }) => {
         
         {/* Section Header */}
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill border border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill border border-teal-500/30 text-teal-400 text-xs font-semibold uppercase tracking-widest">
             <Layers className="w-3.5 h-3.5" />
             Featured Work
           </div>
@@ -242,7 +248,7 @@ const Projects = ({ onIframeToggle }) => {
           {projectsList.map((project) => (
             <div
               key={project.id}
-              className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 hover:border-blue-400/40 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group"
+              className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 hover:border-teal-400/40 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group"
             >
               {/* Left Column: Details */}
               <div className="lg:col-span-7 space-y-6">
@@ -260,7 +266,7 @@ const Projects = ({ onIframeToggle }) => {
 
                 {/* Title & Tagline */}
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-teal-300 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-sm font-medium text-slate-300 mt-1">
@@ -272,7 +278,7 @@ const Projects = ({ onIframeToggle }) => {
                 <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
                   <p>{project.description}</p>
                   <div className="p-4 rounded-2xl glass-card border border-white/10 bg-white/5">
-                    <span className="text-xs font-mono font-bold text-blue-300 block mb-1">
+                    <span className="text-xs font-mono font-bold text-teal-300 block mb-1">
                       💡 PROBLEM SOLVED:
                     </span>
                     <p className="text-xs text-slate-300">{project.problemSolved}</p>
@@ -295,7 +301,7 @@ const Projects = ({ onIframeToggle }) => {
                 {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-2 pt-2">
                   {project.techStack.map((tech, tIdx) => (
-                    <span key={tIdx} className="px-3 py-1 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-blue-300">
+                    <span key={tIdx} className="px-3 py-1 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-teal-300">
                       {tech}
                     </span>
                   ))}
@@ -307,7 +313,7 @@ const Projects = ({ onIframeToggle }) => {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl shadow-lg shadow-blue-500/25 hover:scale-105 transition-all"
+                    className="flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 rounded-xl shadow-lg shadow-teal-500/25 hover:scale-105 transition-all"
                   >
                     <ExternalLink className="w-4 h-4" />
                     Visit Live Website
@@ -317,7 +323,7 @@ const Projects = ({ onIframeToggle }) => {
                     onClick={() => openIframe(project)}
                     className="flex items-center gap-2 px-5 py-3 text-xs font-bold text-slate-200 glass-card hover:bg-white/10 rounded-xl border border-white/15 hover:scale-105 transition-all"
                   >
-                    <Maximize2 className="w-4 h-4 text-purple-400" />
+                    <Maximize2 className="w-4 h-4 text-teal-400" />
                     Expand Fullscreen Demo
                   </button>
 
@@ -354,7 +360,7 @@ const Projects = ({ onIframeToggle }) => {
             <div className="flex items-center justify-between px-6 py-4 bg-slate-900 border-b border-white/10">
               <div className="flex items-center gap-3">
                 {/* Vercel Icon */}
-                <svg className="w-4 h-4 fill-white" viewBox="0 0 76 65">
+                <svg className="w-4 h-4 fill-white shrink-0" viewBox="0 0 76 65">
                   <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
                 </svg>
                 <div className="flex items-center gap-1.5">
@@ -377,7 +383,7 @@ const Projects = ({ onIframeToggle }) => {
                   href={activeIframe.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500 transition-colors"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-600 text-white text-xs font-semibold hover:bg-teal-500 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Open New Tab</span>

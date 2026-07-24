@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,8 +13,16 @@ function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isLivePreviewOpen, setIsLivePreviewOpen] = useState(false);
 
+  useEffect(() => {
+    // Prevent browser auto-scrolling to hash or iframe focus on load
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#05070f] text-slate-100 selection:bg-blue-500 selection:text-white relative font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#05070f] text-slate-100 selection:bg-teal-500 selection:text-white relative font-sans overflow-x-hidden">
       
       {/* Sticky Glass Navbar - Automatically hidden during full screen live previews */}
       {!isLivePreviewOpen && (
