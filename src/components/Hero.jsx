@@ -4,9 +4,9 @@ import { ArrowRight, Download, Sparkles, Terminal, Code2, Server, Award, Chevron
 const Hero = ({ onOpenResume }) => {
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex flex-col justify-center items-center overflow-hidden px-4 sm:px-6 lg:px-8">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+      {/* Ambient background glows - Bluish Green / Cyan Emerald */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-emerald-500/15 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
         
@@ -14,7 +14,7 @@ const Hero = ({ onOpenResume }) => {
         <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
           
           {/* Glowing Status Pill */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-pill border border-blue-500/30 text-blue-300 text-xs font-semibold tracking-wide shadow-lg shadow-blue-500/10">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-pill border border-emerald-500/30 text-emerald-300 text-xs font-semibold tracking-wide shadow-lg shadow-emerald-500/10">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -34,7 +34,7 @@ const Hero = ({ onOpenResume }) => {
 
           {/* Tagline */}
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
-            Building <span className="text-white font-medium underline decoration-blue-500/50 underline-offset-4">scalable web applications</span> and solving real world problems with clean code, automated pipelines, and cloud-native solutions.
+            Building <span className="text-white font-medium underline decoration-teal-500/50 underline-offset-4">scalable web applications</span> and solving real world problems with clean code, automated pipelines, and cloud-native solutions.
           </p>
 
           {/* Key Tech Badges */}
@@ -42,7 +42,7 @@ const Hero = ({ onOpenResume }) => {
             {['React.js', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Docker', 'AWS', 'Python', 'Kubernetes'].map((tech) => (
               <span 
                 key={tech} 
-                className="px-3 py-1 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:border-blue-400/50 hover:text-blue-300 transition-all cursor-default"
+                className="px-3 py-1 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:border-emerald-400/50 hover:text-emerald-300 transition-all cursor-default"
               >
                 {tech}
               </span>
@@ -53,7 +53,7 @@ const Hero = ({ onOpenResume }) => {
           <div className="flex flex-wrap items-center gap-4 pt-4 w-full sm:w-auto">
             <a
               href="#projects"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-xl shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 rounded-xl shadow-xl shadow-teal-600/25 hover:scale-105 transition-all duration-300"
             >
               Explore My Projects
               <ArrowRight className="w-4 h-4" />
@@ -61,9 +61,9 @@ const Hero = ({ onOpenResume }) => {
 
             <button
               onClick={onOpenResume}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-slate-200 glass-card hover:bg-white/10 rounded-xl border border-white/15 hover:border-blue-400/40 hover:scale-105 transition-all duration-300"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-slate-200 glass-card hover:bg-white/10 rounded-xl border border-white/15 hover:border-teal-400/40 hover:scale-105 transition-all duration-300"
             >
-              <Download className="w-4 h-4 text-blue-400" />
+              <Download className="w-4 h-4 text-teal-400" />
               Download Resume
             </button>
           </div>
@@ -79,7 +79,7 @@ const Hero = ({ onOpenResume }) => {
               <span className="text-xs text-slate-400 font-medium">CGPA (KIIT CSE)</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-extrabold text-gradient">IIT Bombay</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-gradient-emerald">IIT Bombay</span>
               <span className="text-xs text-slate-400 font-medium">GATE Goal '27</span>
             </div>
           </div>
@@ -108,10 +108,10 @@ const Hero = ({ onOpenResume }) => {
                 <div className="absolute bottom-4 left-4 right-4 glass-panel rounded-xl p-3 border border-white/10 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-white">Devi Nayak</p>
-                    <p className="text-[10px] text-blue-400 font-mono">@Ghostx003</p>
+                    <p className="text-[10px] text-teal-400 font-mono">@Ghostx003</p>
                   </div>
-                  <div className="w-8 h-8 rounded-lg bg-blue-600/30 flex items-center justify-center border border-blue-400/40">
-                    <Code2 className="w-4 h-4 text-blue-300" />
+                  <div className="w-8 h-8 rounded-lg bg-teal-600/30 flex items-center justify-center border border-teal-400/40">
+                    <Code2 className="w-4 h-4 text-teal-300" />
                   </div>
                 </div>
               </div>

@@ -150,11 +150,11 @@ const Projects = ({ onIframeToggle }) => {
         'Personalized Bookmarks & Note-taking',
         'Custom Productivity Keyboard Shortcuts'
       ],
-      liveUrl: 'https://courceflix-live.vercel.app/#dashboard-view',
+      liveUrl: 'https://courceflix-live.vercel.app/',
       githubUrl: 'https://github.com/Ghostx003',
       badge: 'Featured EdTech',
-      gradient: 'from-blue-600 to-indigo-600',
-      accentColor: 'blue'
+      gradient: 'from-cyan-600 to-teal-600',
+      accentColor: 'cyan'
     },
     {
       id: 'testflix',
@@ -172,8 +172,8 @@ const Projects = ({ onIframeToggle }) => {
       liveUrl: 'https://testflix-pro.vercel.app/app',
       githubUrl: 'https://github.com/Ghostx003',
       badge: 'Analytics Suite',
-      gradient: 'from-purple-600 to-pink-600',
-      accentColor: 'purple'
+      gradient: 'from-teal-600 to-emerald-600',
+      accentColor: 'teal'
     },
     {
       id: 'softpix',
@@ -191,7 +191,7 @@ const Projects = ({ onIframeToggle }) => {
       liveUrl: 'https://softpix.vercel.app/',
       githubUrl: 'https://github.com/Ghostx003',
       badge: 'Google Photos Alternative',
-      gradient: 'from-emerald-600 to-teal-600',
+      gradient: 'from-emerald-600 to-cyan-600',
       accentColor: 'emerald'
     },
     {
@@ -210,7 +210,7 @@ const Projects = ({ onIframeToggle }) => {
       liveUrl: 'https://moo-fresh.vercel.app/',
       githubUrl: 'https://github.com/Ghostx003/mooFresh',
       badge: 'Real Business E-Commerce',
-      gradient: 'from-amber-500 via-orange-500 to-emerald-600',
+      gradient: 'from-amber-500 via-teal-500 to-emerald-600',
       accentColor: 'amber'
     }
   ];
@@ -218,8 +218,8 @@ const Projects = ({ onIframeToggle }) => {
   return (
     <section id="projects" className="py-24 relative px-4 sm:px-6 lg:px-8">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none"></div>
-      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto space-y-16">
         

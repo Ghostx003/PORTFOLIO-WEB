@@ -6,8 +6,9 @@
     --bg-card: rgba(15, 23, 42, 0.65);
     --border-glass: rgba(255, 255, 255, 0.08);
     --accent-cyan: #00f2fe;
-    --accent-purple: #9d4edd;
-    --accent-blue: #3b82f6;
+    --accent-emerald: #10b981;
+    --accent-teal: #14b8a6;
+    --accent-blue: #38bdf8;
   }
 
   html {
@@ -21,9 +22,9 @@
     overflow-x: hidden;
     background-color: #05070f;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.12) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.10) 0px, transparent 50%);
     background-attachment: fixed;
   }
 }
@@ -46,14 +47,14 @@
 }
 
 .glass-card:hover {
-  background: rgba(26, 38, 66, 0.75);
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 12px 40px -10px rgba(59, 130, 246, 0.25);
+  background: rgba(20, 35, 55, 0.75);
+  border-color: rgba(45, 212, 191, 0.4);
+  box-shadow: 0 12px 40px -10px rgba(20, 184, 166, 0.25);
   transform: translateY(-4px);
 }
 
 .glass-navbar {
-  background: rgba(5, 7, 15, 0.75);
+  background: rgba(5, 7, 15, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -65,21 +66,21 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Modern Gradient Text */
+/* Modern Bluish-Green / Cyan-Emerald Gradients */
 .text-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #2dd4bf 50%, #34d399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-emerald {
-  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -118,5 +119,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.5);
+  background: rgba(20, 184, 166, 0.5);
 }
