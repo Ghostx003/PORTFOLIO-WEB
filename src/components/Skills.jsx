@@ -3,7 +3,7 @@ import { Cpu, Code, Server, Cloud, Wrench, Layers } from 'lucide-react';
 import TechIcon from './TechIcons';
 
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('frontend');
 
   const categories = [
     { id: 'all', name: 'All Technologies', icon: <Layers className="w-4 h-4" /> },
