@@ -71,8 +71,8 @@ const Hero = ({ onOpenResume }) => {
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 w-full">
             <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-extrabold text-white">4+</span>
-              <span className="text-xs text-slate-400 font-medium">Production Projects</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-white">9+</span>
+              <span className="text-xs text-slate-400 font-medium">Production Apps</span>
             </div>
             <div className="flex flex-col">
               <span className="text-2xl sm:text-3xl font-extrabold text-gradient-cyan">7.23</span>

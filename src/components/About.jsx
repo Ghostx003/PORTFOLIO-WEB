@@ -27,7 +27,7 @@ const About = () => {
 
   const milestones = [
     "Computer Science & Engineering graduate from KIIT (2021-2025) with 7.23/10 CGPA.",
-    "Built and deployed 3 high-performance live web platforms (CourseFlix, TestFlix Pro, SoftPix).",
+    "Built and deployed 9+ high-performance production apps and real business platforms (Moo Fresh, CourseFlix, TestFlix Pro, SoftPix).",
     "Actively preparing for GATE (2026-2027) with the target goal of joining IIT Bombay for M.Tech.",
     "Deep focus on DevOps tools, microservices, container orchestrations, and distributed systems."
   ];
