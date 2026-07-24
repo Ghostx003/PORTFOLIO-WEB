@@ -207,7 +207,7 @@ const Projects = ({ onIframeToggle }) => {
         'Family-Friendly Accessible UI (Simple & Zero Clutter)',
         'Flexible Subscription & Transparent Daily Pricing'
       ],
-      liveUrl: 'https://github.com/Ghostx003/mooFresh',
+      liveUrl: 'https://moo-fresh.vercel.app/',
       githubUrl: 'https://github.com/Ghostx003/mooFresh',
       badge: 'Real Business E-Commerce',
       gradient: 'from-amber-500 via-orange-500 to-emerald-600',
