@@ -1,6 +1,127 @@
 import React, { useState } from 'react';
-import { ExternalLink, Layers, Play, Monitor, CheckCircle, Sparkles, X, Eye } from 'lucide-react';
+import { ExternalLink, Layers, Play, Monitor, CheckCircle, Sparkles, X, Eye, Maximize2, RotateCw, Lock, ShieldCheck } from 'lucide-react';
 import GithubIcon from './GithubIcon';
+
+const VercelLiveCard = ({ project, onExpand }) => {
+  const [key, setKey] = useState(0);
+  const isVercelLive = project.liveUrl.includes('vercel.app');
+
+  const handleRefresh = (e) => {
+    e.stopPropagation();
+    setKey((prev) => prev + 1);
+  };
+
+  return (
+    <div className="relative glass-card rounded-2xl p-1.5 border border-white/20 shadow-2xl overflow-hidden group/card bg-slate-950">
+      
+      {/* Vercel Header Bar */}
+      <div className="flex items-center justify-between px-3 py-2 bg-slate-900/90 rounded-t-xl border-b border-white/10 text-xs">
+        <div className="flex items-center gap-2">
+          {/* Vercel Triangle Icon */}
+          <svg className="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 76 65">
+            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+          </svg>
+          <div className="flex items-center gap-1.5 ml-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+          </div>
+        </div>
+
+        {/* URL Bar */}
+        <div className="flex-1 max-w-xs mx-2">
+          <div className="flex items-center justify-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[11px] font-mono text-slate-300 truncate">
+            <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+            <span className="truncate">{project.liveUrl.replace('https://', '')}</span>
+          </div>
+        </div>
+
+        {/* Header Action Buttons */}
+        <div className="flex items-center gap-1.5">
+          {isVercelLive && (
+            <button
+              onClick={handleRefresh}
+              className="p-1 rounded-md bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+              title="Refresh Live Demo"
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+            </button>
+          )}
+          <button
+            onClick={() => onExpand(project)}
+            className="p-1 rounded-md bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white transition-colors"
+            title="Expand Fullscreen Preview"
+          >
+            <Maximize2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Embedded Live Frame / Card Body */}
+      <div className="relative h-80 sm:h-96 w-full bg-slate-950 overflow-hidden rounded-b-xl">
+        {isVercelLive ? (
+          <iframe
+            key={key}
+            src={project.liveUrl}
+            title={project.title}
+            className="w-full h-full border-0 rounded-b-xl"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          ></iframe>
+        ) : (
+          /* Vercel Deployment Card for GitHub repo project */
+          <div className="w-full h-full flex flex-col justify-between p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 relative">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                <div>
+                  <h5 className="text-sm font-bold text-white">Vercel Deployment</h5>
+                  <p className="text-[10px] text-slate-400 font-mono">Production • main branch</p>
+                </div>
+              </div>
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Ready
+              </span>
+            </div>
+
+            <div className="space-y-3 py-4">
+              <span className="text-xs text-amber-400 font-mono uppercase tracking-wider block">Real Business E-Commerce</span>
+              <h4 className="text-2xl font-extrabold text-white">{project.title}</h4>
+              <p className="text-xs text-slate-300 leading-relaxed">{project.tagline}</p>
+            </div>
+
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" />
+                View Code on GitHub
+              </a>
+              <button
+                onClick={() => onExpand(project)}
+                className="flex items-center gap-1.5 text-xs text-blue-400 font-semibold hover:underline"
+              >
+                Full Details <Maximize2 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Floating Vercel Status Badge Overlay */}
+        {isVercelLive && (
+          <div className="absolute bottom-3 right-3 glass-panel px-3 py-1.5 rounded-xl border border-white/20 text-[11px] font-medium text-slate-200 shadow-xl flex items-center gap-2 backdrop-blur-md pointer-events-none">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Live Interactive Demo</span>
+          </div>
+        )}
+      </div>
+
+    </div>
+  );
+};
 
 const Projects = ({ onIframeToggle }) => {
   const [activeIframe, setActiveIframe] = useState(null);
@@ -118,7 +239,7 @@ const Projects = ({ onIframeToggle }) => {
 
         {/* Projects Cards List */}
         <div className="space-y-12">
-          {projectsList.map((project, index) => (
+          {projectsList.map((project) => (
             <div
               key={project.id}
               className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 hover:border-blue-400/40 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group"
@@ -131,7 +252,8 @@ const Projects = ({ onIframeToggle }) => {
                   <span className={`px-3 py-1 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${project.gradient} shadow-md`}>
                     {project.badge}
                   </span>
-                  <span className="text-xs font-mono text-slate-400">
+                  <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     Live Web App
                   </span>
                 </div>
@@ -195,8 +317,8 @@ const Projects = ({ onIframeToggle }) => {
                     onClick={() => openIframe(project)}
                     className="flex items-center gap-2 px-5 py-3 text-xs font-bold text-slate-200 glass-card hover:bg-white/10 rounded-xl border border-white/15 hover:scale-105 transition-all"
                   >
-                    <Eye className="w-4 h-4 text-purple-400" />
-                    Interactive Live Preview
+                    <Maximize2 className="w-4 h-4 text-purple-400" />
+                    Expand Fullscreen Demo
                   </button>
 
                   <a
@@ -212,45 +334,9 @@ const Projects = ({ onIframeToggle }) => {
 
               </div>
 
-              {/* Right Column: Visual Live Web Card Mockup */}
+              {/* Right Column: Vercel Live Preview Card Simulator */}
               <div className="lg:col-span-5 flex flex-col justify-center">
-                <div 
-                  onClick={() => openIframe(project)}
-                  className="relative glass-card rounded-2xl p-2 border border-white/15 cursor-pointer group/preview overflow-hidden shadow-2xl hover:border-blue-400/50 transition-all duration-300"
-                >
-                  {/* Browser Window Header Mockup */}
-                  <div className="flex items-center justify-between px-3 py-2 bg-slate-900/80 rounded-t-xl border-b border-white/10">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-400 bg-white/5 px-3 py-0.5 rounded-md truncate max-w-[200px]">
-                      {project.liveUrl}
-                    </div>
-                    <div className="w-4"></div>
-                  </div>
-
-                  {/* Preview Image Card Container */}
-                  <div className="relative h-64 sm:h-72 w-full bg-slate-950 flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-                    
-                    {/* Background Graphic */}
-                    <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${project.gradient}`}></div>
-
-                    <Monitor className="w-12 h-12 text-blue-400 mb-3 group-hover/preview:scale-110 transition-transform duration-300" />
-                    
-                    <h4 className="text-lg font-bold text-white z-10">{project.title}</h4>
-                    <p className="text-xs text-slate-400 mt-1 max-w-xs z-10">Click to open interactive preview modal inside portfolio</p>
-
-                    {/* Hover Overlay Button */}
-                    <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 group-hover/preview:opacity-100 flex items-center justify-center transition-opacity duration-300 z-20">
-                      <span className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-xl">
-                        <Play className="w-4 h-4 fill-current" />
-                        Launch Live View
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <VercelLiveCard project={project} onExpand={openIframe} />
               </div>
 
             </div>
@@ -259,25 +345,30 @@ const Projects = ({ onIframeToggle }) => {
 
       </div>
 
-      {/* Interactive Embedded Iframe Modal */}
+      {/* Interactive Fullscreen Embedded Iframe Modal */}
       {activeIframe && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-in fade-in duration-200">
-          <div className="glass-panel w-full max-w-6xl h-[85vh] rounded-3xl border border-white/20 shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200">
+          <div className="glass-panel w-full max-w-7xl h-[92vh] rounded-3xl border border-white/20 shadow-2xl flex flex-col overflow-hidden">
             
             {/* Modal Browser Header */}
             <div className="flex items-center justify-between px-6 py-4 bg-slate-900 border-b border-white/10">
               <div className="flex items-center gap-3">
+                {/* Vercel Icon */}
+                <svg className="w-4 h-4 fill-white" viewBox="0 0 76 65">
+                  <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+                </svg>
                 <div className="flex items-center gap-1.5">
                   <button onClick={closeIframe} className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80"></button>
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <span className="text-xs font-bold text-white hidden sm:inline">{activeIframe.title}</span>
+                <span className="text-xs font-bold text-white hidden sm:inline ml-2">{activeIframe.title}</span>
               </div>
 
               <div className="flex-1 max-w-xl mx-4">
-                <div className="bg-white/5 border border-white/10 text-xs font-mono text-slate-300 px-4 py-1.5 rounded-xl text-center truncate">
-                  {activeIframe.liveUrl}
+                <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-xs font-mono text-slate-300 px-4 py-1.5 rounded-xl text-center truncate">
+                  <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="truncate">{activeIframe.liveUrl}</span>
                 </div>
               </div>
 
@@ -286,21 +377,21 @@ const Projects = ({ onIframeToggle }) => {
                   href={activeIframe.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Open New Tab</span>
                 </a>
                 <button
                   onClick={closeIframe}
-                  className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white"
+                  className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* Embedded Iframe */}
+            {/* Fullscreen Embedded Iframe */}
             <div className="flex-1 w-full bg-white relative">
               <iframe
                 src={activeIframe.liveUrl}
