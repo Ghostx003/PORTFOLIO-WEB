@@ -140,15 +140,20 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Phone Box */}
+                {/* Phone & WhatsApp Box */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shrink-0">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-xs text-slate-400 font-mono block">PHONE / WHATSAPP</span>
-                    <a href={`tel:${phone}`} className="text-sm font-bold text-white hover:text-emerald-300 transition-colors block">
-                      {phone}
+                    <a
+                      href="https://wa.me/917016135937?text=Hi%20Devi,%20I%20saw%20your%20portfolio!"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold text-white hover:text-emerald-300 transition-colors block"
+                    >
+                      {phone} <span className="text-[10px] text-emerald-400 font-mono font-normal ml-1">💬 Chat on WhatsApp</span>
                     </a>
                   </div>
                 </div>
