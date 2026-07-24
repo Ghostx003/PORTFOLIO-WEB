@@ -74,13 +74,13 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 relative px-4 sm:px-6 lg:px-8">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto space-y-16">
         
         {/* Section Header */}
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill border border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill border border-teal-500/30 text-teal-400 text-xs font-semibold uppercase tracking-widest">
             <MessageSquare className="w-3.5 h-3.5" />
             Let's Build Together
           </div>
@@ -109,12 +109,12 @@ const Contact = () => {
                 
                 {/* Email Box */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-400/40 flex items-center justify-center text-blue-400 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-600/20 border border-teal-400/40 flex items-center justify-center text-teal-400 shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-xs text-slate-400 font-mono block">MY GMAIL ADDRESS</span>
-                    <a href={`mailto:${email}`} className="text-sm font-bold text-white hover:text-blue-300 transition-colors truncate block">
+                    <a href={`mailto:${email}`} className="text-sm font-bold text-white hover:text-teal-300 transition-colors truncate block">
                       {email}
                     </a>
                   </div>
@@ -129,12 +129,12 @@ const Contact = () => {
 
                 {/* GitHub Box */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-400/40 flex items-center justify-center text-purple-400 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-600/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 shrink-0">
                     <GithubIcon className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-xs text-slate-400 font-mono block">GITHUB PROFILE</span>
-                    <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-purple-300 transition-colors truncate block">
+                    <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-cyan-300 transition-colors truncate block">
                       github.com/Ghostx003
                     </a>
                   </div>
@@ -155,7 +155,7 @@ const Contact = () => {
 
                 {/* Location Box */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-600/20 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-600/20 border border-teal-400/40 flex items-center justify-center text-teal-400 shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -185,7 +185,7 @@ const Contact = () => {
             <div className="glass-panel rounded-3xl p-8 border border-white/10 space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">Send Me a Message</h3>
-                <p className="text-xs text-slate-400 mt-1">This form sends a message directly to my Gmail inbox (<span className="text-blue-400 font-mono">nayakdevi8@gmail.com</span>).</p>
+                <p className="text-xs text-slate-400 mt-1">This form sends a message directly to my Gmail inbox (<span className="text-teal-400 font-mono">nayakdevi8@gmail.com</span>).</p>
               </div>
 
               {submitted ? (
@@ -209,7 +209,7 @@ const Contact = () => {
                         placeholder="John Doe"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-blue-400/60 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-teal-400/60 transition-colors"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -220,7 +220,7 @@ const Contact = () => {
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-blue-400/60 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-teal-400/60 transition-colors"
                       />
                     </div>
                   </div>
@@ -233,7 +233,7 @@ const Contact = () => {
                       placeholder="Project Inquiry / Job Opportunity"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-blue-400/60 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-teal-400/60 transition-colors"
                     />
                   </div>
 
@@ -245,14 +245,14 @@ const Contact = () => {
                       placeholder="Tell me about your project or inquiry..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-blue-400/60 transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl glass-card border border-white/10 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-teal-400/60 transition-colors resize-none"
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSending}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-all disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 rounded-xl shadow-xl shadow-teal-500/25 hover:scale-[1.02] transition-all disabled:opacity-50"
                   >
                     {isSending ? (
                       <>
