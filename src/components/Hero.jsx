@@ -85,19 +85,13 @@ const Hero = ({ onOpenResume }) => {
           </div>
         </div>
 
-        {/* Right Column: Photo & Glass Frame */}
+        {/* Right Column: Photo & Clean Glass Frame */}
         <div className="lg:col-span-5 flex justify-center items-center relative">
           
-          {/* Orbital Glow Ring */}
-          <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 opacity-30 blur-2xl animate-glow"></div>
-
           {/* Main Photo Card */}
           <div className="relative group">
             
-            {/* Ambient border gradient */}
-            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-60 blur-sm group-hover:opacity-100 transition duration-500"></div>
-
-            <div className="relative glass-card rounded-3xl p-3 sm:p-4 overflow-hidden border border-white/20 shadow-2xl">
+            <div className="relative glass-panel rounded-3xl p-3 sm:p-4 border border-white/10 shadow-2xl overflow-hidden">
               
               {/* Photo Frame */}
               <div className="relative w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-slate-900">
@@ -122,16 +116,6 @@ const Hero = ({ onOpenResume }) => {
                 </div>
               </div>
 
-              {/* Floating Tech Badges */}
-              <div className="absolute -top-3 -right-3 glass-panel px-3 py-1.5 rounded-xl border border-white/20 text-xs font-semibold text-blue-300 shadow-xl flex items-center gap-1.5 animate-float">
-                <Server className="w-3.5 h-3.5 text-purple-400" />
-                <span>DevOps Mindset</span>
-              </div>
-
-              <div className="absolute -bottom-3 -left-3 glass-panel px-3 py-1.5 rounded-xl border border-white/20 text-xs font-semibold text-emerald-300 shadow-xl flex items-center gap-1.5">
-                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Full-Stack Engineer</span>
-              </div>
             </div>
           </div>
         </div>
