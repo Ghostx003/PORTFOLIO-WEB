@@ -72,6 +72,25 @@ const Projects = ({ onIframeToggle }) => {
       badge: 'Google Photos Alternative',
       gradient: 'from-emerald-600 to-teal-600',
       accentColor: 'emerald'
+    },
+    {
+      id: 'moofresh',
+      title: 'Moo Fresh - Pure Dairy E-Commerce Platform',
+      tagline: 'Real business platform delivering 100% unadulterated cow milk directly to homes',
+      description: 'A purpose-built, accessible e-commerce platform designed to streamline daily doorstep milk subscriptions for middle-aged families with zero interface bloat.',
+      problemSolved: 'Eliminates milk adulteration & water mixing, ensures reliable doorstep morning delivery, and provides transparent, fair, and consistent daily pricing.',
+      techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'E-Commerce APIs'],
+      features: [
+        '100% Pure Unadulterated Farm Milk Guarantee (0% Water)',
+        'Direct Home-to-Home Reliable Morning Delivery',
+        'Family-Friendly Accessible UI (Simple & Zero Clutter)',
+        'Flexible Subscription & Transparent Daily Pricing'
+      ],
+      liveUrl: 'https://github.com/Ghostx003/mooFresh',
+      githubUrl: 'https://github.com/Ghostx003/mooFresh',
+      badge: 'Real Business E-Commerce',
+      gradient: 'from-amber-500 via-orange-500 to-emerald-600',
+      accentColor: 'amber'
     }
   ];
 
